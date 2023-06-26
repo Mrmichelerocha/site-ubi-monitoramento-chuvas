@@ -1,0 +1,286 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block titulo %}
+  Página inicial
+{% endblock %}
+
+{% block conteudo %}
+
+<!-- Sale & Revenue Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-6 col-xl-3">
+            <a href="registerdevices" class="">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="bi bi-phone-vibrate fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Adicione Dispositivos</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <a href="alldevices" class="">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="bi bi-diagram-3 fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Todos os Dispositivos</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <a href="allagents" class="">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="bi bi-exclamation-triangle-fill fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Agentes no sistema</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <a href="allagents" class="">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="bi bi-exclamation-triangle-fill fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Agentes no sistema</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Sale & Revenue End -->
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">grafico da temperatura</h6>
+                <canvas id="line-chart" width="612" height="306" style="display: block; box-sizing: border-box; height: 306px; width: 612px;"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">grafico da umidade</h6>
+                <canvas id="bar-chart" width="612" height="306" style="display: block; box-sizing: border-box; height: 306px; width: 612px;"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">grafico da pluviometro</h6>
+                <canvas id="barem-chart" width="612" height="306" style="display: block; box-sizing: border-box; height: 306px; width: 612px;"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">grafico da anemometro</h6>
+                <canvas id="linem-chart" width="612" height="306" style="display: block; box-sizing: border-box; height: 306px; width: 612px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var ctxLine = document.getElementById('line-chart').getContext('2d');
+    var ctxBar = document.getElementById('bar-chart').getContext('2d');
+    var ctxBB = document.getElementById('barem-chart').getContext('2d');
+    var ctxLL = document.getElementById('linem-chart').getContext('2d');
+
+    var lineChart = new Chart(ctxLine, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'temperatura',
+          data: [],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+            type: 'time',
+            distribution: 'linear',
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'MMM D'
+              }
+            }
+          }]
+        }
+      }
+    });
+
+    var barChart = new Chart(ctxBar, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'umidade',
+          data: [],
+          backgroundColor: 'rgb(75, 192, 192)',
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+            type: 'time',
+            distribution: 'linear',
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'MMM D'
+              }
+            }
+          }]
+        }
+      }
+    });
+
+    {% comment %} var bbChart = new Chart(ctxBB, {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'My Chart3',
+            data: [],
+            backgroundColor: 'rgb(75, 192, 192)',
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            xAxes: [{
+              type: 'time',
+              distribution: 'linear',
+              time: {
+                unit: 'day',
+                displayFormats: {
+                  day: 'MMM D'
+                }
+              }
+            }]
+          }
+        }
+    });
+
+    var llChart = new Chart(ctxll, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+            label: 'My Chart4',
+            data: [],
+            backgroundColor: 'rgb(75, 192, 192)',
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            xAxes: [{
+                type: 'time',
+                distribution: 'linear',
+                time: {
+                unit: 'day',
+                displayFormats: {
+                    day: 'MMM D'
+                }
+                }
+            }]
+            }
+        }
+    }); {% endcomment %}
+
+    setInterval(function() {
+      $.ajax({
+        url: '/routersdatatemp/',
+        success: function(data) {
+            lineChart.data.labels = data.map(function(d) {
+                var createdDate = new Date(d.created_at);
+                var hour = createdDate.getHours();
+                var minutes = createdDate.getMinutes();
+                var seconds = createdDate.getSeconds();
+                
+                // Formate a hora conforme necessário
+                var formattedTime = hour + ':' + minutes + ':' + seconds;
+                
+                return formattedTime;
+              });
+            lineChart.data.datasets[0].data = data.map(function(d) { return d.slug; });
+            lineChart.update();
+        }
+      });
+    }, 2000);
+
+    setInterval(function() {
+      $.ajax({
+        url: '/routersdataumi/',
+        success: function(data) {
+            barChart.data.labels = data.map(function(d) {
+                var createdDate = new Date(d.created_at);
+                var hour = createdDate.getHours();
+                var minutes = createdDate.getMinutes();
+                var seconds = createdDate.getSeconds();
+                
+                // Formate a hora conforme necessário
+                var formattedTime = hour + ':' + minutes + ':' + seconds;
+                
+                return formattedTime;
+              });
+            barChart.data.datasets[0].data = data.map(function(d) { return d.slug; });
+            barChart.update();
+        }
+      });
+    }, 2000);
+
+    {% comment %} setInterval(function() {
+        $.ajax({
+          url: '/routersdatapluv/',
+          success: function(data) {
+              bbChart.data.labels = data.map(function(d) {
+                  var createdDate = new Date(d.created_at);
+                  var hour = createdDate.getHours();
+                  var minutes = createdDate.getMinutes();
+                  var seconds = createdDate.getSeconds();
+                  
+                  // Formate a hora conforme necessário
+                  var formattedTime = hour + ':' + minutes + ':' + seconds;
+                  
+                  return formattedTime;
+                });
+              bbChart.data.datasets[0].data = data.map(function(d) { return d.slug; });
+              bbChart.update();
+          }
+        });
+    }, 2000);
+
+    setInterval(function() {
+        $.ajax({
+            url: '/routersdataane/',
+            success: function(data) {
+                llChart.data.labels = data.map(function(d) {
+                    var createdDate = new Date(d.created_at);
+                    var hour = createdDate.getHours();
+                    var minutes = createdDate.getMinutes();
+                    var seconds = createdDate.getSeconds();
+                    
+                    // Formate a hora conforme necessário
+                    var formattedTime = hour + ':' + minutes + ':' + seconds;
+                    
+                    return formattedTime;
+                });
+                llChart.data.datasets[0].data = data.map(function(d) { return d.slug; });
+                llChart.update();
+            }
+        });
+    }, 2000); {% endcomment %}
+</script>
+{% endblock %}
