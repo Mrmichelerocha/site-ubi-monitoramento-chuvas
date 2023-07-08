@@ -1,196 +1,44 @@
-# MQTT Acquisition System
-Este projeto Django realiza a comunicação com dispositivos via MQTT, possibilitando o cadastro do dispositivo e já tendo configurado o modelo de aquisição dinâmico.
+#  Monitoramento Ubíquo de Chuva Utilizando LoRa e Sistemas Multiagentes
 
-## Instalação
-Certifique-se que possui Python3 e PIP 3 instalados.
+Este repositório Git contém o código-fonte e a documentação relacionados ao projeto de ubiquos que desenvolvi para o monitoramento de chuva. O objetivo principal desse projeto é utilizar a tecnologia LoRa em conjunto com sistemas multiagentes para obter informações precisas sobre a ocorrência de chuvas em uma determinada região.
 
-### 1. Criação do ambiente virtual
-    
-É fortemente recomendado que seja utilizado um ambiente virtual para a utilização neste projeto. Principalmente quando se têm outros projetos em Python 3 na mesma máquina. Para tanto, se já possuir o módulo do python "venv" instalado, basta rodar o comando:
+## 🔧 Funções
 
-Linux:
+O projeto consiste em três principais componentes:
 
-    python3 -m venv [nome do ambiente virtual]
+1. **Dispositivos de Sensoriamento:** São os nós sensores distribuídos pela área a ser monitorada. Esses dispositivos são equipados com sensores de chuva e módulos LoRa para comunicação sem fio. Eles são responsáveis por coletar os dados sobre a ocorrência de chuva e enviá-los para a central de processamento. <a href="https://github.com/Edson-source/Lora_ESP32_Ubiquos" target="_blank"><button>Repositório no GitHub</button></a>
 
+2. **Central de Processamento:** É o componente central responsável por receber os dados enviados pelos dispositivos de sensoriamento, processá-los e armazená-los. Essa central utiliza a tecnologia de sistemas multiagentes para coordenar as atividades dos nós sensores e gerenciar a coleta e análise dos dados <a href="https://github.com/Mrmichelerocha/ubi-agents/" target="_blank"><button>Repositório no GitHub</button></a>
 
-Windows:
 
-    python -m venv [nome do ambiente virtual]
+3. **Interface de Visualização**: É a interface gráfica que permite aos usuários visualizar as informações coletadas sobre a chuva. Essa interface fornece dados em tempo real, gráficos e relatórios sobre a quantidade e intensidade da chuva, permitindo uma análise mais precisa e a tomada de decisões informadas. <a href="https://github.com/Mrmichelerocha/ubi-web" target="_blank"><button>Repositório no GitHub</button></a>
 
+## Funcionamento
 
-### 2. Instalando os pacotes necessários
-Para instalar os pacotes necessários vamos primeiro ir pelo terminal até a raíz do projeto. Então basta rodar o seguinte comando:
+Os dispositivos de sensoriamento são implantados em locais estratégicos da área a ser monitorada, garantindo uma boa cobertura. Eles coletam informações sobre a chuva, como intensidade e quantidade de precipitação, e enviam esses dados para a central de processamento por meio da tecnologia LoRa.
 
-Linux:
-    
-    pip3 install -r requirements.txt
+![img4](https://github.com/Mrmichelerocha/ubi-agents/assets/93664169/28af2778-09ac-4c7d-9854-2043390bc5ff)
 
 
-Windows:
 
-    pip install -r requirements.txt
+A central de processamento recebe os dados dos dispositivos de sensoriamento e os processa usando técnicas de sistemas multiagentes. Os agentes são responsáveis por analisar os dados recebidos, identificar padrões, calcular estatísticas e gerar relatórios. Além disso, eles coordenam a atividade dos dispositivos de sensoriamento, ajustando a frequência de coleta de dados com base nas necessidades de cada região.
 
-#### Opcional
+A interface de visualização permite aos usuários acessar as informações coletadas de forma intuitiva e amigável. Eles podem visualizar os dados em tempo real, obter gráficos e relatórios detalhados sobre a chuva em diferentes áreas monitoradas. Isso possibilita uma melhor compreensão das condições climáticas e auxilia na tomada de decisões, como o planejamento agrícola e o gerenciamento de recursos hídricos.
 
-Para realizar testes/desenvolvimento em máquina local, você pode instalar o Mosquitto Broker (Caso não tenha um Broker externo), e o MQTT Explorer para testes e visualização de fluxo.
+## 👨‍💻 Tecnologias Utilizadas
 
-### 3. Configurando o projeto
-Iremos utilizar dois principais arquivos de configuração, a dizer *conf/settings.py* e *conf/local_settings.py*. O primeiro contém todas as configurações que serão utilizadas no projeto em qualquer máquina que este rode, já o outro contém as configurações específicas para cada máquina.
+> - Python
+> - LoRa
+> - C++
 
-Portando, na instalação devemos apenas criar um arquivo chamado *local_settings.py* na pasta *conf*, para configurarmos o projeto. Este arquivo já é esperado para ser importado no settings.py e irá sobrescrever qualquer configuração existente.
 
-Segue um exemplo de *local_settings.py*:
 
-    DEBUG = True
+### 🤝 Suporte/Contato
 
-    BASE_URL = "http://teste123.com.br/"
-    BROKER_ADDRESS = "127.0.0.1"
-    
-    ALLOWED_HOSTS = ["subdominio.dominio.com.br", "123.45.6.789" ]
-    
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'nome_do_banco_de_dados',
-            'USER': 'postgres',
-            'PASSWORD': 'senha',
-            'HOST': 'localhost',
-            'PORT': 5432
-        }
-    }
-    
-Abaixo, uma definição rápida de cada elemnto:
-#### DEBUG
-Define o modo de operação do Django. Se definido como True, o djando irá operar em modo DEBUG e exibirá informação mais detalahdas sobre requisições quando houver algum erro. 
+[![Whatsapp Badge](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/5511951864397)
+[![Linktree Badge](https://img.shields.io/badge/linktree-39E09B?style=for-the-badge&logo=linktree&logoColor=white)](https://linktr.ee/mrmichelerocha)
+[![Instagram Badge](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/mr.michelerocha/?hl=pt-br)
+  <a href="https://www.linkedin.com/in/enc-michele-rocha/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>  
 
-###### ATENÇÃO: em modo de produção manter DEBUG = False
-
-#### ALLOWED_HOSTS
-Uma lista de todos os domínios ou IPs que o servidor deve poder atuar. Ao rodar o servidor pelo Django (* comandos do django) é possivel definir ["*", ] para aceitar qualquer host.
-
-####  DATABASES
-Um dicionário contendo as informações de cada base de dados que será utilizada. Por padrão o Django utiliza o database definido como *default*. A seguir a definição de cada valor:
-
-    DATABASES = {
-        'default': -> Identificação da base para o Django
-            'ENGINE': 'django.db.backends.postgresql_psycopg2', -> módulo que realizara o gerenciamento da base
-            'NAME': 'delta', ->  Nome da base
-            'USER': 'postgres', -> Usuário
-            'PASSWORD': '12345', -> Senha
-            'HOST': 'localhost', -> Host
-            'PORT': 5432, -> Porta
-        }
-    }
-
-Além dessas podem ser definidas várias outras configurações de acordo com a documentação do Django.
-
-### BASE_URL
-Descreve o endereço que o servidor está hospedado. Isso, será utilizado para gerar os links de atualização de firmwares.
-
-### BROKER_ADDRESS
-Endereço do Broker MQTT que o servidor tentará conectar.
-
-### Realizando as migrações
-
-    ATENÇÂO: Neste projeto em específico, utilizamos funções assíncronas que
-    são iniciadas juntamente ao django nno arquivo __init__.py dos apps accounts
-    e mqtt_manager. Portanto é necessário comentar todo o código desses arquivos
-    antes e rodar estes comandos a fim de evitar problemas.
-
-    Para tanto, basta inserir um # no início de cada linha de código.
-
-O Django possúi uma ótima ferramenta de gerenciamento do banco de dados. Básicamente executaremos dois comandos. O primeiro irá ler os arquivos *models* e criarão os arquivos de migração - que definem quais as alterações necessárias na base de dados. O segundo irá aplicar as alterações a partir dos arquivos criados com o primeiro comando. São os comandos:
-
-Linux:
-
-    python3 manage.py makemigrations
-    python3 manage.py migrate
-
-Windows:
-
-    python manage.py makemigrations
-    python manage.py migrate
-
-### Executar
-Perfeito, agora temos o servidor instalado e configurado. Para executá-lo podemos configurar o wsgi em um servidor (consultar documentação), ou executar o servidor próprio do Django, que serve muito bem para testes - esse servidor começa a ter problemas já com um número baixo de requisições simultâneas, por isso não é adequado para produção.
-
-Para executar o servidor do Django, rodamos o seguinte comando:
-
-Linux:
-
-    python3 manage.py runserver 8000
-
-Windows:
-
-    python manage.py runserver 8000
-
-Sendo 8000 a porta em que irá rodar.
-
----
-
-## Instalação
-
-Comandos importantes:
-
-Sempre que alguma alteração for feita nos modelos de dados (models), é importante criar os arquivos de migrações e aplicálos na base de dados com os seguintes comandos.
-
-Linux:
-
-    python3 manage.py makemigrations
-    python3 manage.py migrate
-
-Windows:
-
-    python manage.py makemigrations
-    python manage.py migrate
-
-Além disso, sempre que arquivos estáticos novos forem adicionados, quando se estiver em produção, é importando rodar o collectstatic que reúne os arquivos estáticos no diretório que o servidor (Ex: Apache) utilizará.
-
-Linux:
-
-    python3 manage.py collectstatic
-
-Windows:
-
-    python manage.py collectstatic
-
-
-Por fim, vamos criar um superusuário, que terá todas as permissões dentro do sistema. Para tanto, executaremos os seguintes comandos:
-
-Linux:
-
-    python3 manage.py createsuperuser
-
-Windows:
-
-    python manage.py createsuperuser
-
-## Fluxo de adição de um dispositivo
-Dentro do sistema, um administrador pode cadastrar os dispositivos, indicando seu modelo, MAC, e localização, então poderá cadastrar os dados que serão enviados pelo dispositivo, indicando a tag que referenciará o dado. 
-
-*OBS: Todos os dados são armazenados como pontos flutuantes de dupla precisão, através disso é possível abranger um número satisfatório de caso. Se não for suficiente para o seu caso, fique à vontade para editar este módulo.*
-
-## FLuxo do sistema
-
-Este projeto possui a arquitetura descrita à seguir:
-
-    ---------------- <--- /in -----  ---------------- <--- /in ----  ----------------
-    |  Dispositivo |                 |    Broker    |                |   Servidor   |
-    ---------------- ---- /out --->  ---------------- ---- /out -->  ----------------
-
-Para quem não está familiarizado com o MQTT, o Broker é um servidor que centraliza a comunicação, poupando sockets do nosso servidor principal. Dentro do Broker, temos os chamados "tópicos", que são canais de mensagem. Um cliente MQTT pode se inscrever em qualquer tópico "s", e então receberá as mensagens publicadas no topico "s". Além disso, um cliente pode publicar em um tópico "p" (independente de estar inscrito), e quando o fizer, todos os clientes inscritos no tópico "t" receberão a mensagem.
-
-Com isso, percebemos que se publicarmos uma mensagem em um tópico em que estamos inscritos, receberemos a mensagem.
-
-Assim sendo, temos a definimos a seguinte arquitetura:
-    
-- Cada dispositivo se inscreverá no tópico "sensor/\<mac>/in" (tópico de entrada do dispositivo), e publicará no tópico "sensor/\<mac>/out" (tópico de saída do dispositivo). Vale ressaltar que a notação \<mac> deverá ser substituida pelo MAC do dispositivo.
-- Por sua vez, o servidor se inscreverá np tópico "sensor/\<mac>/out" de cada dispositivo cadastrado. E responderá mensagens, enviando a resposta no tópico "sensor/\<mac>/in".
-- A fim de padronizar a comunicação, as mensagens trocadas deverão estar no formato JSON, e conter, pelo menos, a tag "version", indicando a versão do firmware.
-- Sempre que, no servidor principal, houver um firmware cadastrado com uma versão superior à versão informada pelo firmware, o servidor responderá com a tag "update_url" que conterá um URL temporária para download do firmware.
-
----
-
-## Documentação
-
-Acesso à documentação do Django: https://docs.djangoproject.com/en/4.0/
+✉ mr.michelerocha@gmail.com
+<p align="center">Copyright © 2022 michele rocha</p>
