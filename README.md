@@ -1,6 +1,6 @@
 #  Monitoramento Ubíquo de Chuva Utilizando LoRa e Sistemas Multiagentes
 
-Este repositório Git contém o código-fonte e a documentação relacionados ao projeto de ubiquos que desenvolvi para o monitoramento de chuva. O objetivo principal desse projeto é utilizar a tecnologia LoRa em conjunto com sistemas multiagentes para obter informações precisas sobre a ocorrência de chuvas em uma determinada região.
+Este repositório Git  contém o código-fonte e a documentação relacionados ao projeto de ubiquos que desenvolvi para o monitoramento de chuva. O objetivo principal desse projeto é utilizar a tecnologia LoRa em conjunto com sistemas multiagentes para obter informações precisas sobre a ocorrência de chuvas em uma determinada região.
 
 ![image](https://github.com/Mrmichelerocha/ubi-web/assets/93664169/f311662f-97ed-4a79-b5dc-946dae63cb13)
 
